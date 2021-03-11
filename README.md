@@ -1,4 +1,4 @@
-#Microsoft Teams Chat Extractor
+# Microsoft Teams Chat Extractor
  A Chrome extension to extract chats from Microsoft Teams Web
 
 Microsoft teams does not currently support easily copying transcripts from the interface. This is a much requested feature, as evidenced by https://microsoftteams.uservoice.com/forums/555103-public/suggestions/32184895-export-your-conversations-to-a-document (3500 votes, 22 pages of comments)
