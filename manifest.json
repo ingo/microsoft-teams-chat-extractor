@@ -12,14 +12,14 @@
 	},
 
 	"permissions": [
-        "tabs",
-        "http://*/",
-        "https://*/"
-    ],
+		"activeTab"
+  ],
+
 	"browser_action": {
 		"default_icon": "icons/chat-32.png",
 		"default_popup": "popup.html"
 	},
+
 	"icons": {
 		 "32": "icons/chat-32.png",
 		 "48": "icons/chat-48.png",
