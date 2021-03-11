@@ -12,9 +12,7 @@
 	},
 
 	"permissions": [
-        "tabs",
-        "http://*/",
-        "https://*/"
+				"http://teams.microsoft.com/"
     ],
 	"browser_action": {
 		"default_icon": "icons/chat-32.png",
