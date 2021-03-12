@@ -4,6 +4,7 @@
 	<title>MS Teams Chat Transcript</title>
 	<script src="popup.js"></script>
 	<style>
+
 		body {
 		    font-family: "Segoe UI",system-ui,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
 		    font-size: 12px;
@@ -13,22 +14,29 @@
 				width: 600px
 		}
 
-		.threaded {
-			border-top:1px solid #CCCCCC;
-			padding-top:10px;
-			padding-bottom:10px;
+		h2 {
+			font-size: 14px;
+		}
+
+		.thread {
+			border-left:1px solid #DDDDDD;
+			padding-left:10px;
+		}
+
+		.divider {
+			padding-left: 0px;
+			margin-top: 35px;
+			padding-top: 5px;
+			padding-bottom: 0px;
 		}
 
 		.reply {
 			margin-left: 20px;
+			padding: 5px;
 		}
 
 		.collapsed {
 			background-color:#EEEEEE;
-			border-left:3px solid #999;
-			padding:5px;
-			margin-top:-5px;
-			margin-bottom:25px;
 		}
 
 	</style>

@@ -3,7 +3,7 @@ chrome.runtime.sendMessage(sendChat());
 
 function sendChat() {
 
-  var linksText = "";
+  var links = document.createElement("span");
 
   var threads = document.getElementsByClassName("ts-message-list-item");
   if (threads.length == 0) {
@@ -13,49 +13,50 @@ function sendChat() {
 
   for (let i = 0; i < threads.length; i++) {
     var thread = threads[i];
+    var messages = thread.querySelectorAll("div.message-body");
+    var divider = thread.querySelector('div.message-list-divider');
+    var node = document.createElement("div");
 
-    var messages = thread.querySelectorAll("div.ts-message-thread-body");
-    var hidden = thread.querySelector('.ts-collapsed-string > div[aria-hidden="true"]');
     // only display threaded view if in team chat
-    if(messages.length > 1)
-    {
-      linksText += "<div class='threaded'>"
-    }
-
     for (let index = 0; index < messages.length; index++) {
 
       var message = messages[index];
       var name = message.querySelector('div.ts-msg-name');
       var timestamp = message.querySelector('span.message-datetime');
       var content = message.querySelector('div.message-body-content');
+      var hidden = message.querySelector('.ts-collapsed-string > div[aria-hidden="true"]');
 
-
-      var reply = "";
+      var p = document.createElement("p");
       if(index > 0) {
-        reply = " class='reply' "
+        p.classList.add("reply");
       }
-      linksText += "<p" + reply + ">"
       if(name) {
-        linksText += "<b>" + name.innerText + "</b> ";
+        p.innerHTML += "<b>" + name.innerText + "</b>";
       }
       if(timestamp) {
-        linksText += timestamp.innerText;
+        p.innerHTML += " " + timestamp.innerText;
       }
       if(content) {
-        linksText += "<br>" + content.innerText;
+        p.innerHTML += "<br>" + content.innerText;
       }
       if(hidden && hidden.innerText != "Collapse all") {
-        linksText += "<br><div class='collapsed'>" + hidden.innerText + "</div>";
+        p.classList.add("collapsed");
+        p.innerHTML += hidden.innerText;
       }
-      linksText += "</p>"
+      node.appendChild(p)
     }
 
-    // only display threaded view if in team chat
-    if(messages.length > 1)
-    {
-      linksText += "</div>"
+    node.classList.add("thread");
+    links.appendChild(node);
+
+    if(divider) {
+      var div = document.createElement("h2");
+      div.innerText = divider.innerText;
+      div.className = "divider";
+      links.appendChild(div);
     }
+
   }
 
-  return linksText;
+  return links.innerHTML;
 }
