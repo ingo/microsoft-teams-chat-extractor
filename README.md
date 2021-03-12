@@ -10,7 +10,7 @@ This is not a perfect solution, but it works pretty well.
 1. Download the source code for this extension to your computer (user the Code > Download .zip menu option)
 2. Install the extension into Chrome (see https://www.cnet.com/how-to/how-to-install-chrome-extensions-manually/). If you don't see the icon, see "Pinnning an Extension" below.
 3. Log into Microsoft Teams on the web (https://teams.microsoft.com).
-4. Go to the chat you wish to extract. Note that it only will extract the content that's loaded, so if you want a longer history, scroll upwards in your chat history until you've loaded all the content you like.
+4. Go to the chat you wish to extract. Note that it only will extract the content that's loaded, so if you want a longer history, scroll upwards in your chat history until you've loaded all the content you like. If you have collapsed chat thread, you will need to expand them to export them.
 5. Press the little purple chat button in the extension bar. A popup will appear with the content included.
 6. Copy and paste into whatever form you like.
 
