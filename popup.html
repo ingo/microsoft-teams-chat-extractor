@@ -5,46 +5,297 @@
 	<script src="popup.js"></script>
 	<style>
 
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+		}
+
 		body {
-		    font-family: "Segoe UI",system-ui,"Apple Color Emoji","Segoe UI Emoji",sans-serif;
-		    font-size: 12px;
-		    line-height: 1.4286;
-		    color: #242424;
-		    background-color: #fff;
-				width: 600px
-		}
-
-		h2 {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 			font-size: 14px;
+			line-height: 1.5;
+			color: #e0e0e0;
+			background-color: #1e1e2e;
+			width: 380px;
 		}
 
-		.thread {
-			border-left:1px solid #DDDDDD;
-			padding-left:10px;
+		/* ---- Header ---- */
+		.header {
+			background: #2b2b3d;
+			padding: 14px 16px;
+			border-bottom: 1px solid #3a3a52;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.header img {
+			width: 24px;
+			height: 24px;
+		}
+
+		.header h1 {
+			font-size: 15px;
+			font-weight: 600;
+			color: #fff;
+		}
+
+		/* ---- Options panel ---- */
+		#options {
+			padding: 16px;
+		}
+
+		#options .section-label {
+			font-size: 12px;
+			font-weight: 600;
+			color: #8888a8;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			margin-bottom: 8px;
+		}
+
+		#options .btn-group {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+			margin-bottom: 16px;
+		}
+
+		#options button {
+			display: block;
+			width: 100%;
+			padding: 10px 14px;
+			border: 1px solid #3a3a52;
+			border-radius: 8px;
+			background: #2b2b3d;
+			color: #e0e0e0;
+			font-size: 14px;
+			font-family: inherit;
+			cursor: pointer;
+			text-align: left;
+			transition: background 0.15s, border-color 0.15s;
+		}
+
+		#options button:hover {
+			background: #35354d;
+			border-color: #6264a7;
+		}
+
+		#options button:active {
+			background: #3f3f5a;
+		}
+
+		/* ---- Sort toggle ---- */
+		.sort-group {
+			display: flex;
+			background: #2b2b3d;
+			border: 1px solid #3a3a52;
+			border-radius: 8px;
+			overflow: hidden;
+		}
+
+		.sort-group label {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 8px 0;
+			font-size: 13px;
+			color: #8888a8;
+			cursor: pointer;
+			transition: background 0.15s, color 0.15s;
+			gap: 6px;
+		}
+
+		.sort-group label:first-child {
+			border-right: 1px solid #3a3a52;
+		}
+
+		.sort-group input[type="radio"] {
+			display: none;
+		}
+
+		.sort-group input[type="radio"]:checked + span {
+			color: #fff;
+		}
+
+		.sort-group label:has(input:checked) {
+			background: #3a3a56;
+			color: #fff;
+		}
+
+		/* ---- Status / spinner ---- */
+		#status {
+			padding: 40px 16px;
+			text-align: center;
+			color: #8888a8;
+		}
+
+		#status .spinner {
+			display: inline-block;
+			width: 24px;
+			height: 24px;
+			border: 3px solid #3a3a52;
+			border-top-color: #6264a7;
+			border-radius: 50%;
+			animation: spin 0.8s linear infinite;
+			margin-bottom: 12px;
+		}
+
+		@keyframes spin {
+			to { transform: rotate(360deg); }
+		}
+
+		#status p {
+			font-size: 13px;
+		}
+
+		/* ---- Toolbar ---- */
+		.toolbar {
+			display: flex;
+			gap: 6px;
+			padding: 10px 16px;
+			background: #2b2b3d;
+			border-bottom: 1px solid #3a3a52;
+		}
+
+		.toolbar button {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			padding: 6px 12px;
+			border: 1px solid #3a3a52;
+			border-radius: 6px;
+			background: #1e1e2e;
+			color: #e0e0e0;
+			font-size: 12px;
+			font-family: inherit;
+			cursor: pointer;
+			transition: background 0.15s, border-color 0.15s;
+		}
+
+		.toolbar button:hover {
+			background: #35354d;
+			border-color: #6264a7;
+		}
+
+		.toolbar button:active {
+			background: #3f3f5a;
+		}
+
+		.toolbar button svg {
+			width: 14px;
+			height: 14px;
+			fill: none;
+			stroke: currentColor;
+			stroke-width: 2;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+		}
+
+		.toolbar .toast {
+			font-size: 12px;
+			color: #81c784;
+			align-self: center;
+			margin-left: auto;
+			opacity: 0;
+			transition: opacity 0.3s;
+		}
+
+		.toolbar .toast.show {
+			opacity: 1;
+		}
+
+		/* ---- Chat results ---- */
+		#chat {
+			padding: 0 16px 16px;
+			color: #242424;
+			background: #fff;
+		}
+
+		#transcript {
+			margin-top: 1em;
+			font-family: Arial, sans-serif;
+		}
+
+		#transcript section {
+			padding-left: 1em;
+			border-left: 2px solid #ccc;
+		}
+
+		#chat hr {
+			border: none;
+			border-top: 1px solid #ddd;
+			margin: 1em 0;
 		}
 
 		.divider {
-			padding-left: 0px;
-			margin-top: 35px;
-			padding-top: 5px;
-			padding-bottom: 0px;
+			text-align: center;
+			padding: 5px 0;
+			color: #616161;
+			font-size: 12px;
 		}
 
-		.reply {
-			margin-left: 20px;
-			padding: 5px;
+		div[aria-label*="Mention"] {
+			display: inline;
+			font-weight: bold;
 		}
 
-		.collapsed {
-			background-color:#EEEEEE;
+		blockquote {
+			border-left: 3px solid #6264a7;
+			margin: 0.5em 0;
+			padding: 0.25em 0.75em;
+			background: #f5f5f5;
+			border-radius: 4px;
 		}
 
 	</style>
 </head>
 
 <body>
-	<h1 id='title'>Chat&nbsp;Transcript</h1>
-  <div id='chat'>Loading...</div>
+	<div class="header">
+		<img src="icons/chat-32.png" alt="">
+		<h1 id="title">Chat Transcript</h1>
+	</div>
+	<div id="options">
+		<div class="section-label">Time range</div>
+		<div class="btn-group">
+			<button data-days="-1">Currently loaded messages</button>
+			<button data-days="1">Last 24 hours</button>
+			<button data-days="7">Last 7 days</button>
+			<button data-days="30">Last 30 days</button>
+			<button data-days="90">Last 3 months</button>
+			<button data-days="0">All messages</button>
+		</div>
+		<div class="section-label">Sort order</div>
+		<div class="sort-group">
+			<label>
+				<input type="radio" name="sort" value="oldest" checked>
+				<span>Oldest first</span>
+			</label>
+			<label>
+				<input type="radio" name="sort" value="newest">
+				<span>Newest first</span>
+			</label>
+		</div>
+	</div>
+	<div id="status" style="display:none;">
+		<div class="spinner"></div>
+		<p id="progressText">Loading...</p>
+	</div>
+	<div id="toolbar" class="toolbar" style="display:none;">
+		<button id="copyBtn" title="Copy to clipboard">
+			<svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+			Copy
+		</button>
+		<button id="mdBtn" title="Export as Markdown">
+			<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+			Markdown
+		</button>
+		<span id="toast" class="toast"></span>
+	</div>
+	<div id="chat" style="display:none;"></div>
 </body>
 
 </html>

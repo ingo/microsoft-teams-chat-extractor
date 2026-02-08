@@ -1,21 +1,17 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 
 	"name": "Microsoft Teams Chat Extractor",
 	"description": "Pulls out the chat transcript from the Microsoft Teams online interface",
-	"version": "1.0",
+	"version": "3.0",
 	"author": "Ingo Muschenetz",
 
-	"background": {
-		"scripts": ["popup.js"],
-		"persistent": true
-	},
-
 	"permissions": [
-		"activeTab"
-  ],
+		"activeTab",
+		"scripting"
+	],
 
-	"browser_action": {
+	"action": {
 		"default_icon": "icons/chat-32.png",
 		"default_popup": "popup.html"
 	},
